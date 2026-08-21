@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>إدخال درجات الطلاب</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, Tahoma, sans-serif;
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 35px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: white;
+            font-size: 16px;
+        }
+
+        .info {
+            margin-top: 10px;
+            padding: 15px;
+            background: #eef3f7;
+            border-radius: 6px;
+            font-size: 17px;
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            background: #417690;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+         .student-search {
+            .student-tools {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin: 20px 0;
+
+    align-items: center;
+
+}
+
+
+.student-search {
+
+    flex: 1;
+
+}
+
+
+.student-filter {
+
+    width: 220px;
+
+}
+
+
+.student-filter select {
+
+    width: 100%;
+
+    padding: 12px 15px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    background: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+}
+
+
+@media (max-width: 700px) {
+
+    .student-tools {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+
+    .student-filter {
+
+        width: 100%;
+
+    }
+
+}
+
+    margin: 20px 0;
+
+}
+
+.student-search input {
+
+    width: 100%;
+
+    padding: 12px 15px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 16px;
+
+    outline: none;
+
+}
+
+.student-search input:focus {
+
+    border-color: #417690;
+
+    box-shadow: 0 0 4px rgba(65, 118, 144, 0.25);
+
+}
+        .students {
+            margin-top: 35px;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            min-width: 850px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #417690;
+            color: white;
+        }
+
+        td:nth-child(3) {
+            text-align: right;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+
+        .score-input {
+            width: 100px;
+            padding: 9px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .score-input:focus {
+            outline: none;
+            border-color: #417690;
+            box-shadow: 0 0 4px rgba(65, 118, 144, 0.3);
+        }
+
+        .total-grade {
+            font-weight: bold;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+
+        .total-grade .current {
+            font-size: 18px;
+        }
+
+        .save-button {
+            margin-top: 25px;
+            padding: 13px 30px;
+            border: none;
+            border-radius: 6px;
+            background: #198754;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+.approve-button {
+
+    margin-top: 10px;
+
+    padding: 13px 30px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #6f42c1;
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+
+.approve-button:hover {
+
+    opacity: 0.9;
+}
+        .save-button:hover {
+            opacity: 0.9;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            padding: 13px;
+            border-radius: 6px;
+            background: #fff3cd;
+            color: #664d03;
+        }
+
+        .success {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .empty {
+            margin-top: 20px;
+            padding: 20px;
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .approved {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e9ecef;
+            color: #495057;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th,
+            td {
+                padding: 8px;
+            }
+
+            .score-input {
+                width: 80px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <h1>
+        إدخال درجات الطلاب
+    </h1>
+
+
+    <!-- ===================================
+         الرسائل
+    ==================================== -->
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div
+                class="
+                    message
+
+                    {% if message.tags == 'success' %}
+                        success
+                    {% elif message.tags == 'error' %}
+                        error
+                    {% endif %}
+                "
+            >
+
+                {{ message }}
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <!-- ===================================
+         اختيار المادة والتقييم والمكوّن
+    ==================================== -->
+
+    <form
+        method="get"
+        id="selection-form"
+    >
+
+
+        <!-- المادة -->
+
+        <div class="field">
+
+            <label for="subject">
+                المادة
+            </label>
+
+            <select
+                id="subject"
+                name="subject"
+                required
+            >
+
+                <option value="">
+                    -- اختر المادة --
+                </option>
+
+
+                {% for subject in subjects %}
+
+                    <option
+                        value="{{ subject.id }}"
+
+                        {% if selected_subject == subject.id|stringformat:"s" %}
+                            selected
+                        {% endif %}
+                    >
+
+                        {{ subject.name }}
+
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <!-- التقييم -->
+
+        <div class="field">
+
+            <label for="assessment">
+                التقييم
+            </label>
+
+            <select
+                id="assessment"
+                name="assessment"
+                required
+            >
+
+                <option value="">
+                    -- اختر التقييم --
+                </option>
+
+
+                {% for assessment in assessments %}
+
+                    <option
+                        value="{{ assessment.id }}"
+
+                        data-subject="{{ assessment.subject_id }}"
+
+                        {% if selected_assessment == assessment.id|stringformat:"s" %}
+                            selected
+                        {% endif %}
+                    >
+
+                        {{ assessment.name }}
+
+                        — الدرجة
+                        {{ assessment.max_score }}
+
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <!-- المكوّن -->
+
+        <div class="field">
+
+            <label for="component">
+                المكوّن
+            </label>
+
+            <select
+                id="component"
+                name="component"
+                required
+            >
+
+                <option value="">
+                    -- اختر المكوّن --
+                </option>
+
+
+                {% for component in components %}
+
+                    <option
+                        value="{{ component.id }}"
+
+                        data-assessment="{{ component.assessment_id }}"
+
+                        data-max-score="{{ component.max_score }}"
+
+                        {% if selected_component == component.id|stringformat:"s" %}
+                            selected
+                        {% endif %}
+                    >
+
+                        {{ component.name }}
+
+                        — الدرجة
+                        {{ component.max_score }}
+
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <!-- الدرجة العظمى -->
+
+        <div class="info">
+
+            الدرجة العظمى للمكوّن:
+
+            <strong id="max-score">
+                -
+            </strong>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="button"
+        >
+
+            عرض الطلاب
+
+        </button>
+
+
+    </form>
+
+
+    <!-- ===================================
+         الطلاب
+    ==================================== -->
+
+    {% if selected_component %}
+
+
+        <div class="students">
+
+
+            <h2>
+                طلاب الشعبة
+            </h2>
+
+
+            {% if students %}
+
+
+                <form method="post">
+
+
+                    {% csrf_token %}
+                     <!-- البحث عن الطالب -->
+
+<div class="student-tools">
+
+    <div class="student-search">
+
+        <input
+            type="text"
+            id="studentSearch"
+            placeholder="ابحث عن اسم الطالب أو رمز الطالب..."
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="student-filter">
+
+        <select id="studentFilter">
+
+            <option value="all">
+                كل الطلاب
+            </option>
+
+            <option value="graded">
+                لديهم درجة
+            </option>
+
+            <option value="ungraded">
+                بدون درجة
+            </option>
+
+            <option value="full">
+                الدرجة الكاملة
+            </option>
+
+            <option value="incomplete">
+                درجة ناقصة
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+
+                    <!-- القيم المخفية -->
+
+                    <input
+                        type="hidden"
+                        name="subject"
+                        value="{{ selected_subject }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="assessment"
+                        value="{{ selected_assessment }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="component"
+                        value="{{ selected_component }}"
+                    >
+
+
+                    <div class="table-wrapper">
+
+
+                        <table>
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        #
+                                    </th>
+
+                                    <th>
+                                        رمز الطالب
+                                    </th>
+
+                                    <th>
+                                        اسم الطالب
+                                    </th>
+
+                                    <th>
+                                        الصف
+                                    </th>
+
+                                    <th>
+                                        الشعبة
+                                    </th>
+
+                                    <th>
+                                        الدرجة
+                                    </th>
+
+                                    <th>
+                                        مجموع التقييم
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+
+                                {% for student in students %}
+
+
+                                    <tr>
+
+
+                                        <!-- الرقم -->
+
+                                        <td>
+                                            {{ forloop.counter }}
+                                        </td>
+
+
+                                        <!-- رمز الطالب -->
+
+                                        <td>
+                                            {{ student.student_code }}
+                                        </td>
+
+
+                                        <!-- اسم الطالب -->
+
+                                        <td>
+
+                                            {{ student.first_name }}
+
+                                            {{ student.middle_name }}
+
+                                            {{ student.last_name }}
+
+                                        </td>
+
+
+                                        <!-- الصف -->
+
+                                        <td>
+                                            {{ student.classroom.name }}
+                                        </td>
+
+
+                                        <!-- الشعبة -->
+
+                                        <td>
+                                            {{ student.section.name }}
+                                        </td>
+
+
+                                        <!-- الدرجة -->
+
+                                        <td>
+
+                                            <input
+                                                type="number"
+
+                                                name="score_{{ student.id }}"
+
+                                                class="score-input"
+
+                                                min="0"
+
+                                                max="{{ selected_max_score }}"
+
+                                                step="0.01"
+
+                                                value="{% if student.existing_grade != None %}{{ student.existing_grade }}{% endif %}"
+
+                                                data-student-id="{{ student.id }}"
+
+                                                {% if selected_component_obj.assessment.status == "approved" %}
+                                                    readonly
+                                                {% endif %}
+                                            >
+
+                                        </td>
+
+
+                                        <!-- مجموع التقييم -->
+
+                                        <td class="total-grade">
+
+                                            <strong
+                                                class="current"
+                                                data-total-student="{{ student.id }}"
+                                            >
+                                                {{ student.total_grade }}
+                                            </strong>
+
+                                            /
+
+                                            <span>
+                                                {{ assessment_max_score }}
+                                            </span>
+
+                                        </td>
+
+
+                                    </tr>
+
+
+                                {% endfor %}
+
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+
+                    <!-- ===================================
+                         زر الحفظ
+                    ==================================== -->
+
+
+                    {% if selected_component_obj.assessment.status != "approved" %}
+
+
+                        <button
+                            type="submit"
+                            class="save-button"
+                        >
+
+                            حفظ الدرجات
+
+                        </button>
+
+
+                    {% else %}
+
+
+                        <div class="approved">
+
+                            هذا التقييم معتمد،
+                            ولا يمكن تعديل درجاته.
+
+                        </div>
+
+
+                    {% endif %}
+{% if selected_component_obj.assessment.status != "approved" %}
+
+    <form
+        method="post"
+        action="{% url 'school_core:approve_assessment' %}"
+        style="margin-top: 15px;"
+        onsubmit="return confirm('هل أنت متأكد من اعتماد هذا التقييم؟ بعد الاعتماد لن يمكن تعديل الدرجات.');"
+    >
+
+        {% csrf_token %}
+
+        <input
+            type="hidden"
+            name="subject"
+            value="{{ selected_subject }}"
+        >
+
+        <input
+            type="hidden"
+            name="assessment"
+            value="{{ selected_assessment }}"
+        >
+
+        <input
+            type="hidden"
+            name="component"
+            value="{{ selected_component }}"
+        >
+
+        <button
+            type="submit"
+            class="approve-button"
+        >
+            اعتماد التقييم
+        </button>
+
+    </form>
+
+{% endif %}
+
+                </form>
+
+
+            {% else %}
+
+
+                <div class="empty">
+
+                    لا يوجد طلاب مرتبطون بهذه المادة
+                    والشعبة للمدرس الحالي.
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+<script>
+
+
+/* ==========================================
+   عناصر الاختيار
+========================================== */
+
+const subjectSelect =
+    document.getElementById(
+        "subject"
+    );
+
+
+const assessmentSelect =
+    document.getElementById(
+        "assessment"
+    );
+
+
+const componentSelect =
+    document.getElementById(
+        "component"
+    );
+
+
+const maxScore =
+    document.getElementById(
+        "max-score"
+    );
+
+
+/* ==========================================
+   تحديث التقييمات
+========================================== */
+
+function updateAssessments() {
+
+    const subjectId =
+        subjectSelect.value;
+
+
+    const options =
+        assessmentSelect.querySelectorAll(
+            "option"
+        );
+
+
+    options.forEach(
+        function(option) {
+
+            if (!option.value) {
+
+                option.hidden = false;
+
+                return;
+
+            }
+
+
+            option.hidden =
+                option.dataset.subject
+                !== subjectId;
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   تحديث المكونات
+========================================== */
+
+function updateComponents() {
+
+    const assessmentId =
+        assessmentSelect.value;
+
+
+    const options =
+        componentSelect.querySelectorAll(
+            "option"
+        );
+
+
+    options.forEach(
+        function(option) {
+
+            if (!option.value) {
+
+                option.hidden = false;
+
+                return;
+
+            }
+
+
+            option.hidden =
+                option.dataset.assessment
+                !== assessmentId;
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   تحديث الدرجة العظمى
+========================================== */
+
+function updateMaxScore() {
+
+    const selected =
+        componentSelect.options[
+            componentSelect.selectedIndex
+        ];
+
+
+    if (
+        !selected ||
+        !selected.value
+    ) {
+
+        maxScore.textContent = "-";
+
+        return;
+
+    }
+
+
+    maxScore.textContent =
+        selected.dataset.maxScore;
+
+}
+
+
+/* ==========================================
+   تغيير المادة
+========================================== */
+
+subjectSelect.addEventListener(
+    "change",
+    function() {
+
+        assessmentSelect.value = "";
+
+        componentSelect.value = "";
+
+        maxScore.textContent = "-";
+
+        updateAssessments();
+
+        updateComponents();
+
+    }
+);
+
+
+/* ==========================================
+   تغيير التقييم
+========================================== */
+
+assessmentSelect.addEventListener(
+    "change",
+    function() {
+
+        componentSelect.value = "";
+
+        maxScore.textContent = "-";
+
+        updateComponents();
+
+    }
+);
+
+
+/* ==========================================
+   تغيير المكوّن
+========================================== */
+
+componentSelect.addEventListener(
+    "change",
+    function() {
+
+        updateMaxScore();
+
+    }
+);
+
+
+/* ==========================================
+   التشغيل الأول
+========================================== */
+
+updateAssessments();
+
+updateComponents();
+
+updateMaxScore();
+
+
+/* ==========================================
+   تحديث مجموع التقييم مباشرة
+========================================== */
+
+function updateStudentTotal(input) {
+
+    const studentId =
+        input.dataset.studentId;
+
+
+    const totalElement =
+        document.querySelector(
+            '[data-total-student="' +
+            studentId +
+            '"]'
+        );
+
+
+    if (!totalElement) {
+        return;
+    }
+
+
+    /*
+        القيمة الحالية للمكوّن
+    */
+
+    let currentScore =
+        parseFloat(
+            input.value
+        );
+
+
+    if (isNaN(currentScore)) {
+        currentScore = 0;
+    }
+
+
+    /*
+        الدرجة السابقة التي كانت محسوبة
+        ضمن مجموع التقييم.
+
+        نأخذها من القيمة الموجودة
+        قبل التعديل.
+    */
+
+    const oldScore =
+        parseFloat(
+            input.dataset.oldScore
+        ) || 0;
+
+
+    /*
+        نأخذ مجموع التقييم الحالي
+        من الصفحة.
+    */
+
+    let currentTotal =
+        parseFloat(
+            totalElement.textContent
+        );
+
+
+    if (isNaN(currentTotal)) {
+        currentTotal = 0;
+    }
+
+
+    /*
+        نحذف الدرجة القديمة
+        ونضيف الدرجة الجديدة.
+    */
+
+    const newTotal =
+        currentTotal
+        - oldScore
+        + currentScore;
+
+
+    /*
+        حفظ الدرجة الحالية
+        حتى إذا غيّر المستخدم
+        نفس الحقل مرة أخرى
+        لا يتم الحساب بشكل خاطئ.
+    */
+
+    input.dataset.oldScore =
+        currentScore;
+
+
+    /*
+        منع ظهور أرقام سالبة.
+    */
+
+    const finalTotal =
+        Math.max(
+            0,
+            newTotal
+        );
+
+
+    /*
+        عرض المجموع الجديد.
+    */
+
+    totalElement.textContent =
+        Number.isInteger(finalTotal)
+            ? finalTotal
+            : finalTotal.toFixed(2);
+
+}
+
+
+/* ==========================================
+   تهيئة الدرجات الحالية
+========================================== */
+
+document
+    .querySelectorAll(
+        ".score-input"
+    )
+    .forEach(
+        function(input) {
+
+            const initialScore =
+                parseFloat(
+                    input.value
+                );
+
+
+            input.dataset.oldScore =
+                isNaN(initialScore)
+                    ? 0
+                    : initialScore;
+
+        }
+    );
+
+
+/* ==========================================
+   عند تغيير درجة الطالب
+========================================== */
+
+document.addEventListener(
+    "input",
+    function(event) {
+
+        const input =
+            event.target;
+
+
+        if (
+            !input.classList.contains(
+                "score-input"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+            الحد الأعلى
+        */
+
+        const max =
+            parseFloat(
+                input.max
+            );
+
+
+        /*
+            الدرجة الحالية
+        */
+
+        let value =
+            parseFloat(
+                input.value
+            );
+
+
+        /*
+            منع الدرجة السالبة
+        */
+
+        if (
+            !isNaN(value)
+            && value < 0
+        ) {
+
+            input.value = 0;
+
+            value = 0;
+
+        }
+
+
+        /*
+            منع تجاوز الدرجة العظمى
+        */
+
+        if (
+            !isNaN(value)
+            && !isNaN(max)
+            && value > max
+        ) {
+
+            input.value = max;
+
+            value = max;
+
+        }
+
+
+        /*
+            تحديث مجموع الطالب
+        */
+
+        updateStudentTotal(
+            input
+        );
+
+    }
+);
+/* ==========================================
+   البحث والفلترة عن الطالب
+========================================== */
+
+const studentSearch =
+    document.getElementById("studentSearch");
+
+const studentFilter =
+    document.getElementById("studentFilter");
+
+
+function filterStudents() {
+
+    const searchText =
+        studentSearch
+            ? studentSearch.value
+                .trim()
+                .toLowerCase()
+            : "";
+
+
+    const filterValue =
+        studentFilter
+            ? studentFilter.value
+            : "all";
+
+
+    const rows =
+        document.querySelectorAll(
+            "table tbody tr"
+        );
+
+
+    rows.forEach(
+        function(row) {
+
+            const studentCode =
+                row.cells[1]
+                    ? row.cells[1]
+                        .textContent
+                        .trim()
+                        .toLowerCase()
+                    : "";
+
+
+            const studentName =
+                row.cells[2]
+                    ? row.cells[2]
+                        .textContent
+                        .trim()
+                        .toLowerCase()
+                    : "";
+
+
+            const scoreInput =
+                row.querySelector(
+                    ".score-input"
+                );
+
+
+            let score = null;
+
+
+            if (
+                scoreInput &&
+                scoreInput.value.trim() !== ""
+            ) {
+
+                score =
+                    parseFloat(
+                        scoreInput.value
+                    );
+
+            }
+
+
+            const maxScore =
+                scoreInput
+                    ? parseFloat(
+                        scoreInput.max
+                    )
+                    : 0;
+
+
+            /* البحث */
+
+            const matchesSearch =
+                studentCode.includes(searchText)
+                ||
+                studentName.includes(searchText);
+
+
+            /* الفلتر */
+
+            let matchesFilter = true;
+
+
+            if (filterValue === "graded") {
+
+                matchesFilter =
+                    score !== null
+                    &&
+                    !isNaN(score);
+
+            }
+
+
+            if (filterValue === "ungraded") {
+
+                matchesFilter =
+                    score === null
+                    ||
+                    isNaN(score);
+
+            }
+
+
+            if (filterValue === "full") {
+
+                matchesFilter =
+                    score !== null
+                    &&
+                    !isNaN(score)
+                    &&
+                    score === maxScore;
+
+            }
+
+
+            if (filterValue === "incomplete") {
+
+                matchesFilter =
+                    score !== null
+                    &&
+                    !isNaN(score)
+                    &&
+                    score < maxScore;
+
+            }
+
+
+            /* إظهار أو إخفاء الطالب */
+
+            if (
+                matchesSearch
+                &&
+                matchesFilter
+            ) {
+
+                row.style.display = "";
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* البحث أثناء الكتابة */
+
+if (studentSearch) {
+
+    studentSearch.addEventListener(
+        "input",
+        filterStudents
+    );
+
+}
+
+
+/* الفلتر */
+
+if (studentFilter) {
+
+    studentFilter.addEventListener(
+        "change",
+        filterStudents
+    );
+
+}
+/* ==========================================
+   الحفظ التلقائي + التنقل السريع
+========================================== */
+
+document.addEventListener(
+    "keydown",
+    async function(event) {
+
+        if (
+            !event.target.classList.contains(
+                "score-input"
+            )
+        ) {
+            return;
+        }
+
+        if (event.key !== "Enter") {
+            return;
+        }
+
+        event.preventDefault();
+
+        const input = event.target;
+
+        const inputs = Array.from(
+            document.querySelectorAll(
+                ".score-input:not([readonly])"
+            )
+        );
+
+        const currentIndex =
+            inputs.indexOf(input);
+
+        if (currentIndex === -1) {
+            return;
+        }
+
+        /*
+            إذا كانت الدرجة فارغة
+        */
+
+        if (
+            input.value.trim() === ""
+        ) {
+
+            input.focus();
+
+            return;
+        }
+
+        /*
+            بيانات الطالب والمكوّن
+        */
+
+        const studentId =
+            input.name.replace(
+                "score_",
+                ""
+            );
+
+        const componentId =
+            "{{ selected_component }}"
+        ;
+
+        /*
+            تجهيز البيانات
+        */
+
+        const formData =
+            new FormData();
+
+        formData.append(
+            "student_id",
+            studentId
+        );
+
+        formData.append(
+            "component_id",
+            componentId
+        );
+
+        formData.append(
+            "score",
+            input.value
+        );
+
+        formData.append(
+            "csrfmiddlewaretoken",
+            "{{ csrf_token }}"
+        );
+
+        /*
+            حالة الحفظ
+        */
+
+        input.style.borderColor =
+            "#ffc107";
+
+        try {
+
+            const response =
+                await fetch(
+                    "{% url 'school_core:auto_save_grade' %}",
+                    {
+                        method: "POST",
+
+                        body: formData,
+
+                        headers: {
+                            "X-Requested-With":
+                                "XMLHttpRequest"
+                        }
+                    }
+                );
+
+            const data =
+                await response.json();
+
+            /*
+                فشل الحفظ
+            */
+
+            if (!data.success) {
+
+                input.style.borderColor =
+                    "#dc3545";
+
+                alert(
+                    data.message ||
+                    "فشل حفظ الدرجة."
+                );
+
+                input.focus();
+
+                input.select();
+
+                return;
+            }
+
+            /*
+                نجاح الحفظ
+            */
+
+            input.style.borderColor =
+                "#198754";
+
+            /*
+                تحديث المجموع
+            */
+
+            updateStudentTotal(
+                input
+            );
+
+            /*
+                Enter
+                الطالب التالي
+            */
+
+            if (
+                !event.shiftKey
+            ) {
+
+                const nextInput =
+                    inputs[
+                        currentIndex + 1
+                    ];
+
+                if (nextInput) {
+
+                    nextInput.focus();
+
+                    nextInput.select();
+
+                }
+
+            }
+
+            /*
+                Shift + Enter
+                الطالب السابق
+            */
+
+            else {
+
+                const previousInput =
+                    inputs[
+                        currentIndex - 1
+                    ];
+
+                if (previousInput) {
+
+                    previousInput.focus();
+
+                    previousInput.select();
+
+                }
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Auto Save Error:",
+                error
+            );
+
+            input.style.borderColor =
+                "#dc3545";
+
+            alert(
+                "تعذر الاتصال بالخادم. لم يتم حفظ الدرجة."
+            );
+
+            input.focus();
+
+            input.select();
+
+        }
+
+    }
+);
+</script>
+
+
+</body>
+
+</html>
